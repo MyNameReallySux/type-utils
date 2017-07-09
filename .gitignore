@@ -60,3 +60,4 @@ typings/
 # Bundled files
 public/js
 public/css
+dist/js
