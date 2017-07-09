@@ -4,7 +4,9 @@
   "description": "",
   "main": "app/js/Types.js",
   "scripts": {
-    "test": "mocha"
+	"build": "webpack",
+    "test": "mocha",
+	"prepublish": "npm run build"
   },
   "repository": "git+https://github.com/MyNameReallySux/type-utils.git",
   "author": {

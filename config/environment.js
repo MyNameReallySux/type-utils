@@ -9,7 +9,7 @@ module.exports = {
   is_dev: env === 'development',
   paths: {
     build: path.resolve(app_path, 'dist'),
-    main: path.resolve(app_path, 'app', 'js', 'app.js'),
+    main: path.resolve(app_path, 'app', 'js', 'Types.js'),
     node_modules: path.resolve(app_path, 'node_modules'),
   }
 }
