@@ -1,6 +1,6 @@
 {
   "name": "type-utils",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "./app/js/Types.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "name": "Chris Coppola",
     "email": "<mynamereallysux@gmail.com>"
   },
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/MyNameReallySux/type-utils/issues"
   },
