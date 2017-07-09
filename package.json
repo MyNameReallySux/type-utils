@@ -1,0 +1,39 @@
+{
+  "name": "type-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/js/Types.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "git+https://github.com/MyNameReallySux/type-utils.git",
+  "author": {
+    "name": "Chris Coppola",
+    "email": "<mynamereallysux@gmail.com>"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MyNameReallySux/type-utils/issues"
+  },
+  "homepage": "https://github.com/MyNameReallySux/type-utils#readme",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-proxy": "^1.1.0",
+    "babel-plugin-transform-regenerator": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2015-native-generators": "^6.6.0",
+    "eslint": "^4.1.0",
+    "eslint-loader": "^1.8.0",
+    "jsdom": "10.1.0",
+    "jsdom-global": "3.0.2",
+    "mocha": "^3.4.2",
+    "mocha-jsdom": "^1.1.0",
+    "webpack": "^2.0.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "jquery": "^3.2.1"
+  }
+}
