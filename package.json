@@ -2,7 +2,7 @@
   "name": "type-utils",
   "version": "1.0.0",
   "description": "",
-  "main": "app/js/Types.js",
+  "main": "./app/js/Types.js",
   "scripts": {
 	"build": "webpack",
     "test": "mocha",
