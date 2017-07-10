@@ -6,7 +6,8 @@
   "scripts": {
 	"build": "webpack",
     "test": "mocha",
-	"prepublish": "npm run build"
+	"prepublish": "npm run build",
+	"postinstall": "npm run build"
   },
   "repository": "git+https://github.com/MyNameReallySux/type-utils.git",
   "author": {
