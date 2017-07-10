@@ -1,13 +1,12 @@
 {
   "name": "type-utils",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "main": "./dist/js/app.bundle.js",
   "scripts": {
 	"build": "webpack",
     "test": "mocha",
-	"prepublish": "npm run build",
-	"postinstall": "npm run build"
+	"prepublish": "npm run build"
   },
   "repository": "git+https://github.com/MyNameReallySux/type-utils.git",
   "author": {
