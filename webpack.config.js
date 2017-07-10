@@ -14,7 +14,9 @@ const config = {
   ],
   output: {
     path: paths.build,
-    filename: 'js/app.bundle.js'
+    filename: 'js/app.bundle.js',
+	library: "type-utils",
+    libraryTarget: "commonjs-module"
   },
   module: {
     loaders: [{
