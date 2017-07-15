@@ -44,7 +44,7 @@ class Types {
 	########################## */
 	
 	static isArray(test){
-		return (typeof Array.isArray === 'function' && Array.isArray(test)) || Types.getObjectType(test) === '[object Array]'
+		return typeof Array.isArray === 'function' && Array.isArray(test) || Types.getObjectType(test) === '[object Array]'
 	}
 	static isBoolean(test){
 		return typeof test === "boolean" || Types.getObjectType(test) === '[object Boolean]'
@@ -53,7 +53,7 @@ class Types {
 		return typeof test === 'function' && Types.getObjectType(test) === '[object Function]'
 	}
 	static isNumber(test){
-		return (typeof test === "number" || Types.getObjectType(test) === '[object Number]')
+		return typeof test === "number" || Types.getObjectType(test) === '[object Number]'
 	}
 	static isObject(test){
 		if(test === undefined) return false
@@ -230,7 +230,7 @@ Types.defaultObjectTypes = Object.freeze({
 	map: 		 Types.isMap,
 	regexp: 	 Types.isRegExp,
 	set:		 Types.isSet,
-	weakmap:	 Types.isWeakMap,
+	weakmap:	 Types.isWeakMap
 })
 Types.defaultTypes = Object.assign({}, Types.defaultObjectTypes, Types.defaultNativeTypes)
 
