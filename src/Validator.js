@@ -2,7 +2,6 @@
   Imports
 ########################## */
 
-import 'babel-polyfill'
 import $ from 'jquery'
 import Types from './Types.js'
 
