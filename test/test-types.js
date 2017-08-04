@@ -2,7 +2,7 @@ const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
 
 const assert = require('assert')
-const Types = require('../app/js/Types').default
+const Types = require('../src/Types').default
 const jQuery = require('jquery')
 
 let $, window, document, html

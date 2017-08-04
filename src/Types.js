@@ -126,6 +126,8 @@ class Types {
 		if (Types.isString(test)){
 			test = strict ? test.replace(/\s+/g, '') : test
 			return test.length <= 0
+		} else {
+			return false
 		}
 	}
 

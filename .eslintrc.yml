@@ -8,7 +8,7 @@ parserOptions:
   sourceType: module
 rules:
   accessor-pairs: error
-  array-bracket-newline: error
+  array-bracket-newline: 'off'
   array-bracket-spacing:
     - error
     - never
@@ -180,6 +180,7 @@ rules:
   no-useless-computed-key: error
   no-useless-concat: error
   no-useless-constructor: 'off'
+  no-useless-escape: 'off'
   no-useless-rename: error
   no-useless-return: error
   no-var: error
