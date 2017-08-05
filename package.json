@@ -1,8 +1,8 @@
 {
   "name": "type-utils",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
-  "main": "./dist/js/app.bundle.js",
+  "main": "./dist/src/index.js",
   "scripts": {
 	"build": "webpack",
     "test": "mocha",
