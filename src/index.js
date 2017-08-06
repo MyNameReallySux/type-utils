@@ -2,5 +2,9 @@
   Imports
 ########################## */
 
-import './Types.js'
-import './Validator.js'
+import Types from './Types.js'
+import Validator from './Validator.js'
+
+export {
+	Types, Validator
+}
