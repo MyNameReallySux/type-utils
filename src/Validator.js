@@ -9,44 +9,6 @@ import Types from './Types.js'
   Prototype Functions
 ########################## */
 
-String.prototype.contains = function(test){
-	return this.indexOf(test) != -1
-}
-
-String.prototype.capitalize = function(){
-	return this.charAt(0).toUpperCase() + this.substr(1)
-}
-
-String.prototype.toCamelCase = function(capitalize = false){
-	let words = this.toWordArray()
-	for(let word in words){
-		word = word.trim()
-		word = capitalize ? word.capitalize() : word
-	}
-	return words.join('')
-}
-
-String.prototype.toSnakeCase = function(lowercase = true){
-	let words = this.toWordArray()
-	for(let word in words){
-		word = word.trim()
-		word = lowercase ? word.toLowerCase() : word
-	}
-	return words.join('_')
-}
-
-String.prototype.toReadable = function(){
-	return this.toWordArray().join(' ')
-}
-
-String.prototype.toWordArray = function(){
-	return this.split(/(?=[A-Z_ ])/);
-}
-
-Array.prototype.contains = function(test){
-	return this.indexOf(test) != -1
-}
-
 /* ##########################
   Class Definitions
 ########################## */
