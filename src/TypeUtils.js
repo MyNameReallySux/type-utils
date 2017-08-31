@@ -12,18 +12,18 @@ import $ from 'jquery'
   Class Definitions
 ########################## */
 
-class Types {
+class TypeUtils {
 	/* ##########################
 	  Get Type
 	########################## */
 	
-	static getType(test, types = Types.defaultTypes){
+	static getType(test, types = TypeUtils.defaultTypeUtils){
 		for(let key in types){
 			if(types.hasOwnProperty(key) && types[key](test)) return key
 		}
 	}
 	
-	static getNativeType(test, types = Types.defaultNativeTypes){
+	static getNativeType(test, types = TypeUtils.defaultNativeTypeUtils){
 		for(let key in types){
 			if(types.hasOwnProperty(key) && types[key](test)) return key
 		}
@@ -39,25 +39,25 @@ class Types {
 	########################## */
 	
 	static isArray(test){
-		return typeof Array.isArray === 'function' && Array.isArray(test) || Types.getObjectType(test) === '[object Array]'
+		return typeof Array.isArray === 'function' && Array.isArray(test) || TypeUtils.getObjectType(test) === '[object Array]'
 	}
 	static isBoolean(test){
-		return typeof test === "boolean" || Types.getObjectType(test) === '[object Boolean]'
+		return typeof test === "boolean" || TypeUtils.getObjectType(test) === '[object Boolean]'
 	}
 	static isFunction(test){
-		return typeof test === 'function' && Types.getObjectType(test) === '[object Function]'
+		return typeof test === 'function' && TypeUtils.getObjectType(test) === '[object Function]'
 	}
 	static isNumber(test){
-		return typeof test === "number" || Types.getObjectType(test) === '[object Number]'
+		return typeof test === "number" || TypeUtils.getObjectType(test) === '[object Number]'
 	}
 	static isObject(test){
 		if(test === undefined) return false
 		if(test === null) return false
-		if(Types.isArray(test)) return false
+		if(TypeUtils.isArray(test)) return false
 		return test.constructor.toString().contains("Object") || typeof test == 'object'
 	}
 	static isString(test){
-		return typeof test === "string" || Types.getObjectType(test) === '[object String]'
+		return typeof test === "string" || TypeUtils.getObjectType(test) === '[object String]'
 	}
 	static isSymbol(test){
 		return typeof test === "symbol"
@@ -69,28 +69,28 @@ class Types {
 	########################## */
 	
 	static isArgs(test){
-		return Types.getObjectType(test) === '[object Arguments]'
+		return TypeUtils.getObjectType(test) === '[object Arguments]'
 	}
 	static isDate(test){
-		return Types.getObjectType(test) === '[object Date]'
+		return TypeUtils.getObjectType(test) === '[object Date]'
 	}
 	static isError(test){
 		return test instanceof Error
 	}
 	static isJQuery(test){
-		return Types.isObject(test) && typeof jQuery != undefined ? test instanceof $ : false
+		return TypeUtils.isObject(test) && typeof jQuery != undefined ? test instanceof $ : false
 	}
 	static isMap(test){
-		return Types.getObjectType(test) === '[object Map]'
+		return TypeUtils.getObjectType(test) === '[object Map]'
 	}
 	static isRegExp(test){
-		return Types.getObjectType(test) === '[object RegExp]'
+		return TypeUtils.getObjectType(test) === '[object RegExp]'
 	}
 	static isSet(test){
-		return Types.getObjectType(test) === '[object Set]'
+		return TypeUtils.getObjectType(test) === '[object Set]'
 	}
 	static isWeakMap(test){
-		return Types.getObjectType(test) === '[object WeakMap]'
+		return TypeUtils.getObjectType(test) === '[object WeakMap]'
 	}
 	
 	/* ##########################
@@ -118,7 +118,7 @@ class Types {
 	########################## */
 	
 	static isEmptyString(test, strict = false){
-		if (Types.isString(test)){
+		if (TypeUtils.isString(test)){
 			test = strict ? test.replace(/\s+/g, '') : test
 			return test.length <= 0
 		} else {
@@ -127,14 +127,14 @@ class Types {
 	}
 
 	static isEmptyArray(test, strict = false, depth = -1){
-		if(Types.isArray(test)){
+		if(TypeUtils.isArray(test)){
 			if (depth === 0) return test.length <= 0
-			else if (depth === -1) depth = Types.MAX_DEPTH
+			else if (depth === -1) depth = TypeUtils.MAX_DEPTH
 			depth = depth - 1
 			
 			if (test.length > 0 && strict){
 				for (let element of test){
-					if (!Types.isEmpty(element, strict, depth)) return false
+					if (!TypeUtils.isEmpty(element, strict, depth)) return false
 				}
 			} else {
 				return test.length == 0
@@ -147,13 +147,13 @@ class Types {
 		if (depth === 0)
 			return !strict
 		else if (depth === -1){
-			depth = Types.MAX_DEPTH
+			depth = TypeUtils.MAX_DEPTH
 			if (depth === 0)
 				depth = depth - 1
 
 			for (let key in test){
 				if (test.hasOwnProperty(key) && strict){
-					return Types.isEmpty(test[key])
+					return TypeUtils.isEmpty(test[key])
 				} else if (test.hasOwnProperty(key)){
 					return false
 				}
@@ -163,12 +163,12 @@ class Types {
 	}
 
 	static isEmptyJQuery(test){
-		return Types.isNumber(test.length) && test.length === 0
+		return TypeUtils.isNumber(test.length) && test.length === 0
 	}
 
 	/* eslint complexity: ["error", 11] */
 	static isEmpty(test, strict = true, depth = -1){
-		const type = Types.getType(test)
+		const type = TypeUtils.getType(test)
 		let result
 
 		switch (type){
@@ -182,19 +182,19 @@ class Types {
 				result = false
 				break
 			case 'string':
-				result = Types.isEmptyString(test, strict)
+				result = TypeUtils.isEmptyString(test, strict)
 				break
 			case 'array':
-				result = Types.isEmptyArray(test, strict, depth)
+				result = TypeUtils.isEmptyArray(test, strict, depth)
 				break
 			case 'object':
-				result = Types.isEmptyObject(test, strict, depth)
+				result = TypeUtils.isEmptyObject(test, strict, depth)
 				break
 			case 'jquery':
-				result = Types.isEmptyJQuery(test)
+				result = TypeUtils.isEmptyJQuery(test)
 				break
 			default:
-				result = Types.isEmptyByProperty(test)
+				result = TypeUtils.isEmptyByProperty(test)
 		}
 		return result
 	}
@@ -202,37 +202,37 @@ class Types {
 		if (!test.hasOwnProperty("isEmpty")){
 			return false
 		}
-		return Types.isBoolean(test.isEmpty) && test.isEmpty
+		return TypeUtils.isBoolean(test.isEmpty) && test.isEmpty
 	}
 }
 
-Types.MAX_DEPTH = 21
-Types.defaultNativeTypes = Object.freeze({
-	array: 		 Types.isArray,
-	boolean: 	 Types.isBoolean,
-	function: 	 Types.isFunction,
-	number: 	 Types.isNumber,
-	object: 	 Types.isObject,
-	string: 	 Types.isString,
-	symbol: 	 Types.isSymbol,
+TypeUtils.MAX_DEPTH = 21
+TypeUtils.defaultNativeTypeUtils = Object.freeze({
+	array: 		 TypeUtils.isArray,
+	boolean: 	 TypeUtils.isBoolean,
+	function: 	 TypeUtils.isFunction,
+	number: 	 TypeUtils.isNumber,
+	object: 	 TypeUtils.isObject,
+	string: 	 TypeUtils.isString,
+	symbol: 	 TypeUtils.isSymbol,
 	
-	'undefined': Types.isUndefined,
-	'null': 	 Types.isNull
+	'undefined': TypeUtils.isUndefined,
+	'null': 	 TypeUtils.isNull
 })
-Types.defaultObjectTypes = Object.freeze({
-	args: 		 Types.isArgs,
-	date: 		 Types.isDate,
-	error: 		 Types.isError,
-	jquery: 	 Types.isJQuery,
-	map: 		 Types.isMap,
-	regexp: 	 Types.isRegExp,
-	set:		 Types.isSet,
-	weakmap:	 Types.isWeakMap
+TypeUtils.defaultObjectTypeUtils = Object.freeze({
+	args: 		 TypeUtils.isArgs,
+	date: 		 TypeUtils.isDate,
+	error: 		 TypeUtils.isError,
+	jquery: 	 TypeUtils.isJQuery,
+	map: 		 TypeUtils.isMap,
+	regexp: 	 TypeUtils.isRegExp,
+	set:		 TypeUtils.isSet,
+	weakmap:	 TypeUtils.isWeakMap
 })
-Types.defaultTypes = Object.assign({}, Types.defaultObjectTypes, Types.defaultNativeTypes)
+TypeUtils.defaultTypeUtils = Object.assign({}, TypeUtils.defaultObjectTypeUtils, TypeUtils.defaultNativeTypeUtils)
 
 /* ##########################
   Exports
 ########################## */
 
-export default Types
+export default TypeUtils

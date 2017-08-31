@@ -1,6 +1,6 @@
 import assert from 'assert'
-import Validator from '../src/validator'
-import Types from '../src/types'
+import Validator from '../src/Validator'
+import Types from '../src/TypeUtils'
 
 
 describe('Validator', function(){

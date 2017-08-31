@@ -3,7 +3,7 @@
 ########################## */
 
 import $ from 'jquery'
-import Types from './Types.js'
+import { TypeUtils as Types } from './TypeUtils.js'
 
 /* ##########################
   Prototype Functions
