@@ -1,12 +1,14 @@
 {
   "name": "type-utils",
-  "version": "0.10.6",
+  "version": "0.10.7",
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
     "build": "babel ./src --presets babel-preset-es2015 --out-dir ./dist",
     "test": "mocha",
-    "prepublish": "npm run build"
+
+    "postinstall": "npm run build",
+    "prepublish": "npm run test && npm run build"
   },
   "repository": "git+https://github.com/MyNameReallySux/type-utils.git",
   "author": {
