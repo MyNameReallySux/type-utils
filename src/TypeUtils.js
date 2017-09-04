@@ -25,7 +25,9 @@ class TypeUtils {
 	
 	static getNativeType(test, types = TypeUtils.defaultNativeTypeUtils){
 		for(let key in types){
-			if(types.hasOwnProperty(key) && types[key](test)) return key
+			if(types.hasOwnProperty(key) && types[key](test)){
+				return key
+			}
 		}
 	}
 
@@ -39,7 +41,7 @@ class TypeUtils {
 	########################## */
 	
 	static isArray(test){
-		return typeof Array.isArray === 'function' && Array.isArray(test) || TypeUtils.getObjectType(test) === '[object Array]'
+		return typeof Array.isArray === 'function' && Array.isArray(test)
 	}
 	static isBoolean(test){
 		return typeof test === "boolean" || TypeUtils.getObjectType(test) === '[object Boolean]'
@@ -51,10 +53,7 @@ class TypeUtils {
 		return typeof test === "number" || TypeUtils.getObjectType(test) === '[object Number]'
 	}
 	static isObject(test){
-		if(test === undefined) return false
-		if(test === null) return false
-		if(TypeUtils.isArray(test)) return false
-		return test.constructor.toString().contains("Object") || typeof test == 'object'
+		return test === Object(test) && typeof test === 'object' && !TypeUtils.isArray(test)
 	}
 	static isString(test){
 		return typeof test === "string" || TypeUtils.getObjectType(test) === '[object String]'
@@ -212,10 +211,10 @@ TypeUtils.defaultNativeTypeUtils = Object.freeze({
 	boolean: 	 TypeUtils.isBoolean,
 	function: 	 TypeUtils.isFunction,
 	number: 	 TypeUtils.isNumber,
-	object: 	 TypeUtils.isObject,
 	string: 	 TypeUtils.isString,
 	symbol: 	 TypeUtils.isSymbol,
-	
+	object: 	 TypeUtils.isObject,
+
 	'undefined': TypeUtils.isUndefined,
 	'null': 	 TypeUtils.isNull
 })

@@ -2,3 +2,4 @@
 **/*{.,-}bundle.js
 **/unused/**.js
 public/
+dist/

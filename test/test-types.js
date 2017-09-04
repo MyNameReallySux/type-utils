@@ -2,7 +2,7 @@ const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
 
 const assert = require('assert')
-const Types = require('../src/Types').default
+const Types = require('../src/TypeUtils').default
 const jQuery = require('jquery')
 
 let $, window, document, html
@@ -39,6 +39,7 @@ function getNativeTypesArray(exclusion){
 		function: function(){},
 		number: 1,
 		string: 'test',
+		object: {},
 		'null': null,
 		'undefined': undefined,
 	}
@@ -102,7 +103,7 @@ describe('Types', function(){
 						assert.equal(result, Types.getNativeType(test))
 						done()
 					})
-				})			
+				})
 				describe('Numbers', function(){
 					it("Should return 'number' when '1' is passed in", function(done){
 						let test = 1
@@ -127,12 +128,13 @@ describe('Types', function(){
 						let result = Types.getType(test)
 						assert.equal(result, Types.getNativeType(test))
 						done()
-					})			
+					})
 				})
 				describe('Objects', function(){
 					it("Should return 'object' when an object is passed in", function(done){
 						let test = {}
 						let result = Types.getType(test)
+
 						assert.equal(result, Types.getNativeType(test))
 						done()
 					})
@@ -498,7 +500,6 @@ describe('Types', function(){
 				it("Should return 'false' when any other native is passed in", function(done){
 					let tests = getNativeTypesArray('object')
 					let result
-				
 					for (let test of tests){
 						result = Types.isObject(test)
 						assert.equal(result, false)

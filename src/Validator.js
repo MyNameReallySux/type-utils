@@ -3,7 +3,7 @@
 ########################## */
 
 import $ from 'jquery'
-import { TypeUtils as Types } from './TypeUtils.js'
+import TypeUtils from './TypeUtils'
 
 /* ##########################
   Prototype Functions
@@ -150,14 +150,14 @@ class Validator {
 		
 	}
 	
-	handleMeta(key, options){		
-		this.fields[key].displayName =  Types.isUndefined(options.displayName)  ? key.toReadable().capitalize() : options.displayName
-		this.fields[key].functionName = Types.isUndefined(options.functionName) ? `isValid${key.toCamelCase().capitalize()}` : options.functionName
+	handleMeta(key, options){
+		this.fields[key].displayName =  TypeUtils.isUndefined(options.displayName)  ? key.toReadable().capitalize() : options.displayName
+		this.fields[key].functionName = TypeUtils.isUndefined(options.functionName) ? `isValid${key.toCamelCase().capitalize()}` : options.functionName
 	}
 	
 	handlePatterns(key, options){
 		let patterns = options.pattern || options.patterns
-		let type = Types.getType(patterns)
+		let type = TypeUtils.getType(patterns)
 		
 		switch(type){
 			case 'regexp':
@@ -169,7 +169,7 @@ class Validator {
 			} break;
 			case 'array': {
 				for(let pattern in patterns){
-					let pType = Types.getType(pattern)
+					let pType = TypeUtils.getType(pattern)
 					switch(pType){
 						case 'regexp':
 						case 'undefined': {
@@ -180,7 +180,7 @@ class Validator {
 						} break;
 						default: {
 							throw new Error(`Cannot define validator with pattern of type ${pType}, must be [string|regexp]`)
-						}				
+						}
 					}
 				}
 			} break;
@@ -193,7 +193,7 @@ class Validator {
 	
 	handlePredicates(key, options){
 		let predicates = options.predicate || options.predicates
-		let type = Types.getType(predicates)
+		let type = TypeUtils.getType(predicates)
 		
 		switch(type){
 			case 'function':
@@ -202,7 +202,7 @@ class Validator {
 			} break;
 			case 'array': {
 				for(let predicate in predicates){
-					let pType = Types.getType(predicate)
+					let pType = TypeUtils.getType(predicate)
 					switch(pType){
 						case 'function':
 						case 'undefined': {
@@ -241,11 +241,11 @@ class Validator {
 		
 		function _handleString(){
 			const defaults = Validator.defaults.string
-			const isEmpty = Types.isEmptyString(test)
+			const isEmpty = TypeUtils.isEmptyString(test)
 			
 			requirements = Object.assign({}, defaults, requirements)			
 
-			if(Types.isUndefined(test) || Types.isNull(test)) {
+			if(TypeUtils.isUndefined(test) || TypeUtils.isNull(test)) {
 				errors.push(`${requirements.displayName} field value was undefined or null!`)
 			} else {
 				if(requirements.required && isEmpty){
@@ -257,22 +257,22 @@ class Validator {
 				if(test.length > requirements.max){
 					errors.push(`${requirements.displayName}'s field must be a maximum of length ${requirements.min}, was ${test.length}`)
 				}
-				if(Types.isRegExp(requirements.pattern) && !requirements.pattern.test(test)){
+				if(TypeUtils.isRegExp(requirements.pattern) && !requirements.pattern.test(test)){
 					errors.push(`${requirements.displayName}'s field did not match the required pattern, was ${test} \n pattern: '${requirements.pattern}'`)
 				}
-				if(Types.isArray(requirements.pattern)){
+				if(TypeUtils.isArray(requirements.pattern)){
 					for(let pattern in requirements.pattern){
-						if(Types.isRegExp(pattern) && !pattern.test(test)){
+						if(TypeUtils.isRegExp(pattern) && !pattern.test(test)){
 							errors.push(`${requirements.displayName}'s field did not match one of the required pattern, was ${test} \n pattern: '${requirements.match}'`)
 						}
 					}
 				}
-				if(Types.isFunction(requirements.predicate) && !requirements.predicate()){
+				if(TypeUtils.isFunction(requirements.predicate) && !requirements.predicate()){
 					errors.push(`${requirements.displayName}'s field did not match the required predicate, was ${test}'`)
 				}
-				if(Types.isArray(requirements.predicate)){
+				if(TypeUtils.isArray(requirements.predicate)){
 					for(let predicate in requirements.predicate){
-						if(Types.isRegExp(pattern) && !pattern.test(test)){
+						if(TypeUtils.isRegExp(pattern) && !pattern.test(test)){
 							errors.push(`${requirements.displayName}'s field did not match one of the required predicates, was ${test}'`)
 						}
 					}
@@ -286,7 +286,7 @@ class Validator {
 			let defaults = Validator.defaults.number
 			requirements = Object.assign({}, defaults, requirements)
 			
-			if(Types.isUndefined(test) || Types.isNull(test)) {
+			if(TypeUtils.isUndefined(test) || TypeUtils.isNull(test)) {
 				errors.push(`${requirements.displayName} field value was undefined or null!`)
 			} else {
 				if(requirements.required && isEmpty){
@@ -298,12 +298,12 @@ class Validator {
 				if(test > requirements.max){
 					errors.push(`${requirements.displayName}'s field must be a maximum of value ${requirements.min}, was ${test}`)
 				}
-				if(Types.isFunction(requirements.predicate) && !requirements.predicate()){
+				if(TypeUtils.isFunction(requirements.predicate) && !requirements.predicate()){
 					errors.push(`${requirements.displayName}'s field did not match the required predicate, was ${test}'`)
 				}
-				if(Types.isArray(requirements.predicate)){
+				if(TypeUtils.isArray(requirements.predicate)){
 					for(let predicate in requirements.predicate){
-						if(Types.isRegExp(pattern) && !pattern.test(test)){
+						if(TypeUtils.isRegExp(pattern) && !pattern.test(test)){
 							errors.push(`${requirements.displayName}'s field did not match one of the required predicates, was ${test}'`)
 						}
 					}

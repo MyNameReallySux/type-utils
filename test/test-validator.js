@@ -1,7 +1,5 @@
 import assert from 'assert'
 import Validator from '../src/Validator'
-import Types from '../src/TypeUtils'
-
 
 describe('Validator', function(){
 	describe('#constructor', function(){
@@ -39,7 +37,7 @@ describe('Validator', function(){
 					'email@a123.com'
 				]
 
-				let result 
+				let result
 
 				for(let test in tests){
 					result = instance.isValidEmail(test)

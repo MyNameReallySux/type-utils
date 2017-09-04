@@ -2,8 +2,8 @@
   Imports
 ########################## */
 
-import TypeUtils from './TypeUtils.js'
-import Validator from './Validator.js'
+import TypeUtils from './TypeUtils'
+import Validator from './Validator'
 
 export {
 	TypeUtils, Validator
