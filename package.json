@@ -1,13 +1,13 @@
 {
   "name": "@beautiful-code/type-utils",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Type validation library.",
   "main": "./dist/index.js",
   "scripts": {
     "build": "babel ./src --presets babel-preset-es2015 --out-dir ./dist",
     "test": "mocha",
     "postinstall": "npm run build",
-    "prepublish": "npm run test"
+    "prepublish": "npm run build && npm run test"
   },
   "repository": "git+https://github.com/MyNameReallySux/type-utils.git",
   "author": {
@@ -20,12 +20,12 @@
   },
   "homepage": "https://github.com/MyNameReallySux/type-utils#readme",
   "babel": {
+    "comments": false,
     "presets": [
       "env"
     ],
     "plugins": [
-      "transform-regenerator",
-      "remove-comments"
+      "transform-regenerator"
     ],
     "retainLines": true
   },
