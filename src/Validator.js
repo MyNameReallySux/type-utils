@@ -377,3 +377,6 @@ Validator.defaults = {
 	}
 }
 export default Validator
+export {
+	Validator
+}

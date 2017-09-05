@@ -1,6 +1,6 @@
 {
-  "name": "type-utils",
-  "version": "0.10.7",
+  "name": "@beautiful-code/type-utils",
+  "version": "0.11.0",
   "description": "",
   "main": "./dist/index.js",
   "scripts": {

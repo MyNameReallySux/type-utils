@@ -19,7 +19,9 @@ class TypeUtils {
 	
 	static getType(test, types = TypeUtils.defaultTypeUtils){
 		for(let key in types){
-			if(types.hasOwnProperty(key) && types[key](test)) return key
+			if(types.hasOwnProperty(key) && types[key](test)){
+				return key
+			}
 		}
 	}
 	
@@ -77,7 +79,7 @@ class TypeUtils {
 		return test instanceof Error
 	}
 	static isJQuery(test){
-		return TypeUtils.isObject(test) && typeof jQuery != undefined ? test instanceof $ : false
+		return TypeUtils.isObject(test) && typeof $ != undefined && test.jquery === $.fn.jquery
 	}
 	static isMap(test){
 		return TypeUtils.getObjectType(test) === '[object Map]'
@@ -121,7 +123,7 @@ class TypeUtils {
 			test = strict ? test.replace(/\s+/g, '') : test
 			return test.length <= 0
 		} else {
-			return false
+			return undefined
 		}
 	}
 
@@ -138,7 +140,7 @@ class TypeUtils {
 			} else {
 				return test.length == 0
 			}
-		}	
+		}
 	}
 
 	/* eslint complexity: ["error", 8] */
@@ -235,3 +237,6 @@ TypeUtils.defaultTypeUtils = Object.assign({}, TypeUtils.defaultObjectTypeUtils,
 ########################## */
 
 export default TypeUtils
+export {
+	TypeUtils
+}
