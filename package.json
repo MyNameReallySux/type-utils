@@ -6,7 +6,6 @@
   "scripts": {
     "build": "babel ./src --presets babel-preset-es2015 --out-dir ./dist",
     "test": "mocha",
-
     "postinstall": "npm run build",
     "prepublish": "npm run test && npm run build"
   },
@@ -21,7 +20,9 @@
   },
   "homepage": "https://github.com/MyNameReallySux/type-utils#readme",
   "babel": {
-    "presets": ["env"],
+    "presets": [
+      "env"
+    ],
     "plugins": [
       "transform-regenerator",
       "remove-comments"
