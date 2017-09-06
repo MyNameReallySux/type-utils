@@ -1,7 +1,7 @@
 import assert from 'assert'
 
 import jsdom from 'jsdom'
-import jQuery from 'jQuery'
+import jQuery from 'jquery'
 
 import { TypeUtils } from '../src/TypeUtils'
 
