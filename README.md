@@ -1,18 +1,18 @@
-#Type Utils
+# Type Utils
 
 This is a simple, type identification and validation library. This handles both native types, and es6 types, as well as jQuery objects. This is intended to be used imported via Node.js (or a bundler like Webpack for client side).
 
-##Installation
+## Installation
 
-###Using NPM or Yarn
+### Using NPM or Yarn
 ```
 npm install '@beautiful-code/type-utils'
 yard add '@beautiful-code/type-utils'
 ```
 
-##Usage
+## Usage
 
-###Basic Usage
+### Basic Usage
 
 ```javascript
 const TypeUtils = require('@beautiful-code/type-utils').TypeUtils
