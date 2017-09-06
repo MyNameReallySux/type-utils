@@ -1,12 +1,11 @@
 {
   "name": "@beautiful-code/type-utils",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Type validation library.",
   "main": "./dist/index.js",
   "scripts": {
     "build": "babel ./src --presets babel-preset-es2015 --out-dir ./dist",
     "test": "mocha",
-    "postinstall": "npm run build",
     "prepublish": "npm run build && npm run test"
   },
   "repository": "git+https://github.com/MyNameReallySux/type-utils.git",
