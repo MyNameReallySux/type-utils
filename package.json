@@ -1,6 +1,6 @@
 {
   "name": "@beautiful-code/type-utils",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Type validation library.",
   "main": "./dist/index.js",
   "scripts": {
