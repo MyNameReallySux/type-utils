@@ -1,12 +1,6 @@
 import assert from 'assert'
 
-import jsdom from 'jsdom'
-import jQuery from 'jquery'
-
 import { TypeUtils } from '../src/TypeUtils'
-
-let $, window, document, html, 
-	JSDOM = jsdom.JSDOM
 
 function getTypesArray(exclusion){
 	let map = {
@@ -187,28 +181,6 @@ describe('TypeUtils', function(){
 						}
 
 						assert.ok(result)
-						done()
-					})
-				})
-				describe('jQuery', function(){
-					before(function(){
-						window = new JSDOM(html)
-						document = window.document
-						$ = jQuery
-						html = `
-						<!DOCTYPE html>
-						<html>
-							<body>
-								<div id="Test"></div>
-							</body>
-						</html>
-						`
-					})
-
-					it("Should return 'jQuery' when a jQuery object is passed in", function(done){
-						let test = $('#div')
-						let result = TypeUtils.getType(test)
-						assert.equal(result, 'jquery')
 						done()
 					})
 				})
@@ -585,38 +557,6 @@ describe('TypeUtils', function(){
 					let result
 					for (let test of tests){
 						result = TypeUtils.isError(test)
-						assert.equal(result, false)
-					}
-					done()
-				})
-			})
-			describe('#isJQuery', function(){
-				before(function(){
-					window = new JSDOM(html)
-					document = window.document
-					$ = jQuery
-					html = `
-	<!DOCTYPE html>
-	<html>
-		<body>
-			<div id="Test"></div>
-		</body>
-	</html>
-	`
-				})
-
-				it("Should return 'true' when a jQuery object is passed in", function(done){
-					let test = $('#Test')
-					let result = TypeUtils.isJQuery(test)
-					assert.ok(result)
-					done()
-				})
-
-				it("Should return 'false' when anything else is passed in", function(done){
-					let tests = getTypesArray()
-					let result
-					for (let test of tests){
-						result = TypeUtils.isJQuery(test)
 						assert.equal(result, false)
 					}
 					done()

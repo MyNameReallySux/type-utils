@@ -2,8 +2,6 @@
   Imports
 ########################## */
 
-import $ from 'jquery'
-
 /* ##########################
   Class Definitions
 ########################## */
@@ -73,9 +71,6 @@ class TypeUtils {
 	}
 	static isError(test){
 		return test instanceof Error
-	}
-	static isJQuery(test){
-		return TypeUtils.isObject(test) && typeof $ != undefined && test.jquery === $.fn.jquery
 	}
 	static isMap(test){
 		return TypeUtils.getObjectType(test) === '[object Map]'
@@ -159,10 +154,6 @@ class TypeUtils {
 		}
 	}
 
-	static isEmptyJQuery(test){
-		return TypeUtils.isNumber(test.length) && test.length === 0
-	}
-
 	/* eslint complexity: ["error", 11] */
 	static isEmpty(test, strict = true, depth = -1){
 		const type = TypeUtils.getType(test)
@@ -187,9 +178,6 @@ class TypeUtils {
 			case 'object':
 				result = TypeUtils.isEmptyObject(test, strict, depth)
 				break
-			case 'jquery':
-				result = TypeUtils.isEmptyJQuery(test)
-				break
 			default:
 				result = TypeUtils.isEmptyByProperty(test)
 		}
@@ -199,7 +187,7 @@ class TypeUtils {
 		if (!test.hasOwnProperty("isEmpty")){
 			return false
 		}
-		return TypeUtils.isBoolean(test.isEmpty) && test.isEmpty
+		return test.hasOwnProperty('isEmpty') && TypeUtils.isBoolean(test.isEmpty) && test.isEmpty
 	}
 }
 
@@ -220,7 +208,6 @@ TypeUtils.defaultObjectTypeUtils = Object.freeze({
 	args: 		 TypeUtils.isArgs,
 	date: 		 TypeUtils.isDate,
 	error: 		 TypeUtils.isError,
-	jquery: 	 TypeUtils.isJQuery,
 	map: 		 TypeUtils.isMap,
 	regexp: 	 TypeUtils.isRegExp,
 	set:		 TypeUtils.isSet,
@@ -232,7 +219,42 @@ TypeUtils.defaultTypeUtils = Object.assign({}, TypeUtils.defaultObjectTypeUtils,
   Exports
 ########################## */
 
+let getType = 			TypeUtils.getType,
+	getNativeType = 	TypeUtils.getNativeType,
+	getObjectType = 	TypeUtils.getObjectType,
+
+	isArray = 			TypeUtils.isArray,
+	isBoolean = 		TypeUtils.isBoolean,
+	isFunction = 		TypeUtils.isFunction,
+	isNumber = 			TypeUtils.isNumber,
+	isObject = 			TypeUtils.isObject,
+	isString = 			TypeUtils.isString,
+	isSymbol = 			TypeUtils.isSymbol,
+
+	isArgs = 			TypeUtils.isArgs,
+	isDate = 			TypeUtils.isDate,
+	isError = 			TypeUtils.isError,
+	isMap = 			TypeUtils.isMap,
+	isRegExp = 			TypeUtils.isRegExp,
+	isSet = 			TypeUtils.isSet,
+	isWeakMap = 		TypeUtils.isWeakMap,
+
+	isUndefined = 		TypeUtils.isUndefined,
+	isNull = 			TypeUtils.isNull,
+
+	hasLength =			TypeUtils.hasLength,
+
+	isEmpty = 			TypeUtils.isEmpty,
+	isEmptyString = 	TypeUtils.isEmptyString,
+	isEmptyArray = 		TypeUtils.isEmptyArray,
+	isEmptyObject = 	TypeUtils.isEmptyObject,
+	isEmptyByProperty = TypeUtils.isEmptyByProperty
+
 export default TypeUtils
 export {
-	TypeUtils
+	TypeUtils,
+	getType, getNativeType, getObjectType,
+	isArray, isBoolean, isFunction, isNumber, isObject, isString, isSymbol, 
+	isArgs, isDate, isError, isMap, isRegExp, isSet, isWeakMap, isUndefined, isNull,
+	hasLength, isEmpty, isEmptyString, isEmptyArray, isEmptyObject, isEmptyByProperty
 }

@@ -1,12 +1,10 @@
-'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.TypeUtils = undefined;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /* ##########################
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Imports
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ########################## */
-
-var _jquery = require('jquery');var _jquery2 = _interopRequireDefault(_jquery);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* ##########################
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Imports
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ########################## */
 
 /* ##########################
-                                                                                                                                                                                                                                                                                                                                    Class Definitions
-                                                                                                                                                                                                                                                                                                                                  ########################## */var
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Class Definitions
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ########################## */var
 
 TypeUtils = function () {function TypeUtils() {_classCallCheck(this, TypeUtils);}_createClass(TypeUtils, null, [{ key: 'getType',
 		/* ##########################
@@ -73,9 +71,6 @@ TypeUtils = function () {function TypeUtils() {_classCallCheck(this, TypeUtils);
 		} }, { key: 'isError', value: function isError(
 		test) {
 			return test instanceof Error;
-		} }, { key: 'isJQuery', value: function isJQuery(
-		test) {
-			return TypeUtils.isObject(test) && (typeof _jquery2.default === 'undefined' ? 'undefined' : _typeof(_jquery2.default)) != undefined && test.jquery === _jquery2.default.fn.jquery;
 		} }, { key: 'isMap', value: function isMap(
 		test) {
 			return TypeUtils.getObjectType(test) === '[object Map]';
@@ -157,10 +152,6 @@ TypeUtils = function () {function TypeUtils() {_classCallCheck(this, TypeUtils);
 				}
 				return true;
 			}
-		} }, { key: 'isEmptyJQuery', value: function isEmptyJQuery(
-
-		test) {
-			return TypeUtils.isNumber(test.length) && test.length === 0;
 		}
 
 		/* eslint complexity: ["error", 11] */ }, { key: 'isEmpty', value: function isEmpty(
@@ -187,9 +178,6 @@ TypeUtils = function () {function TypeUtils() {_classCallCheck(this, TypeUtils);
 				case 'object':
 					result = TypeUtils.isEmptyObject(test, strict, depth);
 					break;
-				case 'jquery':
-					result = TypeUtils.isEmptyJQuery(test);
-					break;
 				default:
 					result = TypeUtils.isEmptyByProperty(test);}
 
@@ -199,7 +187,7 @@ TypeUtils = function () {function TypeUtils() {_classCallCheck(this, TypeUtils);
 			if (!test.hasOwnProperty("isEmpty")) {
 				return false;
 			}
-			return TypeUtils.isBoolean(test.isEmpty) && test.isEmpty;
+			return test.hasOwnProperty('isEmpty') && TypeUtils.isBoolean(test.isEmpty) && test.isEmpty;
 		} }]);return TypeUtils;}();
 
 
@@ -220,7 +208,6 @@ TypeUtils.defaultObjectTypeUtils = Object.freeze({
 	args: TypeUtils.isArgs,
 	date: TypeUtils.isDate,
 	error: TypeUtils.isError,
-	jquery: TypeUtils.isJQuery,
 	map: TypeUtils.isMap,
 	regexp: TypeUtils.isRegExp,
 	set: TypeUtils.isSet,
@@ -230,8 +217,43 @@ TypeUtils.defaultTypeUtils = Object.assign({}, TypeUtils.defaultObjectTypeUtils,
 
 /* ##########################
                                                                                                                       Exports
-                                                                                                                    ########################## */exports.default =
+                                                                                                                    ########################## */
+
+var getType = TypeUtils.getType,
+getNativeType = TypeUtils.getNativeType,
+getObjectType = TypeUtils.getObjectType,
+
+isArray = TypeUtils.isArray,
+isBoolean = TypeUtils.isBoolean,
+isFunction = TypeUtils.isFunction,
+isNumber = TypeUtils.isNumber,
+isObject = TypeUtils.isObject,
+isString = TypeUtils.isString,
+isSymbol = TypeUtils.isSymbol,
+
+isArgs = TypeUtils.isArgs,
+isDate = TypeUtils.isDate,
+isError = TypeUtils.isError,
+isMap = TypeUtils.isMap,
+isRegExp = TypeUtils.isRegExp,
+isSet = TypeUtils.isSet,
+isWeakMap = TypeUtils.isWeakMap,
+
+isUndefined = TypeUtils.isUndefined,
+isNull = TypeUtils.isNull,
+
+hasLength = TypeUtils.hasLength,
+
+isEmpty = TypeUtils.isEmpty,
+isEmptyString = TypeUtils.isEmptyString,
+isEmptyArray = TypeUtils.isEmptyArray,
+isEmptyObject = TypeUtils.isEmptyObject,
+isEmptyByProperty = TypeUtils.isEmptyByProperty;exports.default =
 
 TypeUtils;exports.
 
-TypeUtils = TypeUtils;
+TypeUtils = TypeUtils;exports.
+getType = getType;exports.getNativeType = getNativeType;exports.getObjectType = getObjectType;exports.
+isArray = isArray;exports.isBoolean = isBoolean;exports.isFunction = isFunction;exports.isNumber = isNumber;exports.isObject = isObject;exports.isString = isString;exports.isSymbol = isSymbol;exports.
+isArgs = isArgs;exports.isDate = isDate;exports.isError = isError;exports.isMap = isMap;exports.isRegExp = isRegExp;exports.isSet = isSet;exports.isWeakMap = isWeakMap;exports.isUndefined = isUndefined;exports.isNull = isNull;exports.
+hasLength = hasLength;exports.isEmpty = isEmpty;exports.isEmptyString = isEmptyString;exports.isEmptyArray = isEmptyArray;exports.isEmptyObject = isEmptyObject;exports.isEmptyByProperty = isEmptyByProperty;
