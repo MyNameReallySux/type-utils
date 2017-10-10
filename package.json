@@ -1,10 +1,10 @@
 {
   "name": "@beautiful-code/type-utils",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Type validation library.",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "babel ./src --presets babel-preset-es2015 --out-dir ./dist",
+    "build": "babel ./src --out-dir ./dist",
     "test": "mocha",
     "lint": "./node_modules/.bin/eslint ./src",
     "lint:fix": "./node_modules/.bin/eslint --fix ./src",
@@ -22,22 +22,29 @@
   "homepage": "https://github.com/MyNameReallySux/type-utils#readme",
   "babel": {
     "comments": false,
+    "minified": true,
     "presets": [
-      "env"
+      "env",
+      "minify"
     ],
     "plugins": [
-      "transform-regenerator"
+      "transform-regenerator",
+      "remove-comments"
     ],
     "retainLines": true
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
+    "babel-minify": "^0.2.0",
     "babel-plugin-proxy": "^1.1.0",
     "babel-plugin-remove-comments": "^2.0.0",
     "babel-plugin-transform-regenerator": "^6.24.1",
+    "babel-plugin-uglify": "^1.0.2",
+    "babel-preset-babili": "^0.1.4",
     "babel-preset-env": "^1.5.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2015-native-generators": "^6.6.0",
+    "babel-preset-minify": "^0.2.0",
     "chai": "^4.1.2",
     "eslint": "^4.8.0",
     "jsdom": "10.1.0",
